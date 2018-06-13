@@ -1,4 +1,4 @@
-"@author: menendezg 
+ "@author: menendezg 
 "@description: config vim file 2018 for python programming"
 
 set nocompatible              " required
@@ -14,10 +14,10 @@ call vundle#begin()
 "
 " " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
+Plugin 'scrooloose/nerdtree'
 Plugin 'dracula/vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
+Plugin 'andviro/flake8-vim'
 "
 " " The following are examples of different formats supported.
 " " Keep Plugin commands between vundle#begin/end.
@@ -54,12 +54,6 @@ filetype plugin indent on    " required
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 
-
-
-
-
-
-
 set encoding=utf-8
 set tabstop=4
 set softtabstop=4
@@ -71,17 +65,12 @@ set fileformat=unix
 
 
 
-
-
 " enable syntax highlighting
 syntax enable
-
 " show line numbers
 set number
-
 " set tabs to have 4 spaces
 set ts=4
-
 " indent when moving to the next line while writing code
 set autoindent
 
