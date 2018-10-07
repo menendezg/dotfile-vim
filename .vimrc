@@ -22,6 +22,8 @@ Plugin 'morhetz/gruvbox'
 Plugin 'nvie/vim-flake8'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'lifepillar/vim-solarized8'
+Plugin 'sickill/vim-monokai'
+Plugin 'Yggdroot/indentLine'
 
 
 "
@@ -94,13 +96,13 @@ set showmatch
 
 " enable all Python syntax highlighting features
 let python_highlight_all = 1
-
-map <C-n> :NERDTreeToggle<CR>
 set background=dark
 colorscheme gruvbox
+map <C-n> :NERDTreeToggle<CR>
 set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 set laststatus=2
 set t_Co=256
 " auto format python style 
 noremap <F3> :Autoformat<CR>
 autocmd FileType python map <buffer> <F4> :call Flake8()<CR>
+set colorcolumn=80
