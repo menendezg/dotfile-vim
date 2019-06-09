@@ -1,4 +1,4 @@
- "@author: menendezg 
+@author: menendezg 
 "@description: config vim file 2018 for python programming"
 
 set nocompatible              " required
@@ -18,14 +18,20 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'dracula/vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'andviro/flake8-vim'
-Plugin 'morhetz/gruvbox'
 Plugin 'nvie/vim-flake8'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'sickill/vim-monokai'
 Plugin 'Yggdroot/indentLine'
-
-
+Plugin 'hzchirs/vim-material'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'tomasr/molokai'
+Plugin 'valloric/youcompleteme'
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'kaicataldo/material.vim'
+Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 "
 " " The following are examples of different formats supported.
 " " Keep Plugin commands between vundle#begin/end.
@@ -96,13 +102,32 @@ set showmatch
 
 " enable all Python syntax highlighting features
 let python_highlight_all = 1
-set background=dark
-colorscheme gruvbox
+
+
 map <C-n> :NERDTreeToggle<CR>
-set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
-set laststatus=2
-set t_Co=256
+
 " auto format python style 
 noremap <F3> :Autoformat<CR>
 autocmd FileType python map <buffer> <F4> :call Flake8()<CR>
 set colorcolumn=80
+
+
+
+if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198>
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 <https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162>
+"Based on Vim patch 7.4.1770 (`guicolors` option) <https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25c>        " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+    set termguicolors
+endif
+
+set t_Co=256
+colorscheme molokai
+"let g:material_theme_style = 'palenight'
+
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+:set mouse=a
