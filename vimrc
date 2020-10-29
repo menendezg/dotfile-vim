@@ -1,6 +1,3 @@
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 "-------------------=== Code/Project navigation ===-------------
 Plug 'scrooloose/nerdtree'
@@ -8,27 +5,21 @@ Plug 'Yggdroot/indentLine'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
 
 
 "----------------------------------------------------------------
-"Plug 'davidhalter/jedi-vim'
 Plug 'crusoexia/vim-monokai'
-"Plug 'zchee/deoplete-jedi'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'chiel92/vim-autoformat'
 
-"Plug 'psf/black', { 'branch': 'stable' }
-"Plug 'python/black' "Disable atm
-"Plug 'ambv/black'
 Plug 'nvie/vim-flake8'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'w0rp/ale'
 Plug 'othree/html5.vim'
 Plug 'kaicataldo/material.vim'
 Plug 'phanviet/vim-monokai-pro'
-"Plug 'fisadev/vim-isort'
+Plug 'fisadev/vim-isort'
 """"""""""""""""""""""""""""""""""""""""
 Plug 'posva/vim-vue'
 Plug 'othree/html5.vim'
@@ -130,7 +121,8 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'nightsense/carbonized'
 Plug 'erichdongubler/vim-sublime-monokai'
 Plug 'danilo-augusto/vim-afterglow'
-
+Plug 'hzchirs/vim-material'
+Plug 'lifepillar/vim-solarized8'
 call plug#end()
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
@@ -295,11 +287,8 @@ let g:deoplete#enable_at_startup = 1
 
 " UI SETTINGS
 set termguicolors
-" Italics for my favorite color scheme
 let g:palenight_terminal_italics=1
-"let g:gruvbox_contrast_dark = 'dark'
 set background=dark
-colorscheme onedark
 
 
 
@@ -328,8 +317,7 @@ noremap <leader>f :Prettier<CR> "set keys to executte command
 
 "black congiration map and execute when allways save file
 noremap <leader>p :Black<CR> "set keys to executte command
-"autocmd BufWritePre *.py execute ':Black'
-"autocmd BufWritePre *.py execute ':Isort'
+autocmd BufWritePre *.py execute ':Isort'
 
 
 " enable the magic of tabs line in neovim
@@ -347,6 +335,5 @@ augroup END
 
 " List of colors that you do not want. ANSI code or #RRGGBB
 "let g:rainbow#blacklist = [233, 234, 73, 30, 96, 214, 167, 107, 172, 50, 215, '#c792ea', '#ff5370',  202,]
-colorscheme afterglow
-"let g:lightline = { 'colorscheme': 'palenight' }
-let g:airline_theme='afterglow'
+colorscheme onedark
+let g:lightline = { 'colorscheme': 'onedark' }
