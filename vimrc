@@ -1,339 +1,255 @@
-call plug#begin('~/.vim/plugged')
-"-------------------=== Code/Project navigation ===-------------
-Plug 'scrooloose/nerdtree'
-Plug 'Yggdroot/indentLine'
-Plug 'kien/ctrlp.vim'
-Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdcommenter'
+" plugins
+let need_to_install_plugins = 0
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    let need_to_install_plugins = 1
+endif
 
+call plug#begin()
+Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ervandew/supertab'
 
-"----------------------------------------------------------------
-Plug 'crusoexia/vim-monokai'
-
-Plug 'jiangmiao/auto-pairs'
-Plug 'chiel92/vim-autoformat'
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'davidhalter/jedi-vim'
+"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 Plug 'nvie/vim-flake8'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'w0rp/ale'
-Plug 'othree/html5.vim'
-Plug 'kaicataldo/material.vim'
-Plug 'phanviet/vim-monokai-pro'
-Plug 'fisadev/vim-isort'
-""""""""""""""""""""""""""""""""""""""""
-Plug 'posva/vim-vue'
-Plug 'othree/html5.vim'
-Plug 'mattn/emmet-vim'
-Plug 'ap/vim-css-color'
-Plug 'digitaltoad/vim-pug'
-Plug 'wavded/vim-stylus'
-Plug 'elzr/vim-json'
-
-" JS
-Plug 'moll/vim-node'
-Plug 'heavenshell/vim-jsdoc'
-Plug 'pangloss/vim-javascript'
-
-
-
-" Formater
-Plug 'Chiel92/vim-autoformat'
-
-
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'ryanoasis/vim-devicons'
-Plug 'machakann/vim-highlightedyank'
-"highlight
+Plug 'Valloric/YouCompleteMe'
 Plug 'sheerun/vim-polyglot'
-" syntax check
-Plug 'w0rp/ale'
 
-" JS SUPPORT
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-
-""TEST PLUGIN"
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'andymass/vim-matchup'
-Plug 'mattn/emmet-vim'
-
-
-"" Magical Inteliisense. in test of replace ncm2
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-" Improved motion in Vim
-Plug 'easymotion/vim-easymotion'
-" Tmux/Neovim movement integration
-Plug 'christoomey/vim-tmux-navigator'
-
-" Snippet support
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-
-" Print function signatures in echo area
-Plug 'Shougo/echodoc.vim'
-
-" Improved syntax highlighting and indentation
-Plug 'othree/yajs.vim'
-
-Plug 'roxma/nvim-yarp'
-
-Plug 'Shougo/denite.nvim' " Magical search files in
-
-" === UI === "
-" File explorer
-Plug 'scrooloose/nerdtree'
-
-" Colorscheme
-Plug 'mhartington/oceanic-next'
-
-" Customized vim status line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Icons
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'itchyny/lightline.vim'  
-
-
-"MISC PLUGGINS 
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-
-
-"THEME
-Plug 'liuchengxu/space-vim-dark'
-Plug 'flrnprz/plastic.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-sensible'
+Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'haishanh/night-owl.vim'
-Plug 'ayu-theme/ayu-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'morhetz/gruvbox'
-Plug 'cocopon/iceberg.vim'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'rakr/vim-one'
-Plug 'doums/darcula'
-Plug 'arcticicestudio/nord-vim'
-Plug 'sjl/badwolf'
-Plug 'luochen1990/rainbow'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'srcery-colors/srcery-vim'
-Plug 'nightsense/carbonized'
-Plug 'erichdongubler/vim-sublime-monokai'
-Plug 'danilo-augusto/vim-afterglow'
-Plug 'hzchirs/vim-material'
-Plug 'lifepillar/vim-solarized8'
+Plug 'ap/vim-buftabline'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree' 
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'lepture/vim-jinja'
+Plug 'pangloss/vim-javascript'
+Plug 'prettier/vim-prettier'
 call plug#end()
 
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-"                                                                              "
-"                       __   _ _ _ __ ___  _ __ ___                            "
-"                       \ \ / / | '_ ` _ \| '__/ __|                           "
-"                        \ V /| | | | | | | | | (__                            "
-"                         \_/ |_|_| |_| |_|_|  \___|                           "
-"                                                                              "
-"                                                                              "
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"                              
-"                            MENENDEZ GABRIEL                                  "                        
-"                      CONFIGURATION FILE FOR NVIM                             "
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-scriptencoding utf-8
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-" Remap leader key to ,
-let g:mapleader=','
-
-
-
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-"Common configurations. for python programming first
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-"Turn off backup
-" Disable line numbers
-set nonumber
-set nobackup
-set noswapfile
-set nowritebackup
-
-syntax on
-set ruler
-
-
 filetype plugin indent on
+let python_highlight_all=1
+syntax on
+
+if need_to_install_plugins == 1
+    echo "Installing plugins..."
+    silent! PlugInstall
+    echo "Done!"
+    q
+endif
+
+" always show the status bar
+set laststatus=2
+
+" enable 256 colors
+set t_Co=256
+set t_ut=
+
+" turn on line numbering
+set number
+
+" sane text files
+set fileformat=unix
+set encoding=utf-8
+set fileencoding=utf-8
+
+" sane editing
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
+set colorcolumn=80
 set expandtab
-set autoindent
-set cursorline
-set showmatch
-set enc=utf-8
-:set mouse=a
+set viminfo='25,\"50,n~/.viminfo
 
+
+set nobackup
+set nowritebackup
+set noswapfile
+
+
+" word movement
+imap <S-Left> <Esc>bi
+nmap <S-Left> b
+imap <S-Right> <Esc><Right>wi
+nmap <S-Right> w
+
+" indent/unindent with tab/shift-tab
+nmap <Tab> >>
+imap <S-Tab> <Esc><<i
+nmap <S-tab> <<
 let g:neomake_python_enabled_makers = ['flake8']
-let g:jedi#use_splits_not_buffers = "right" "when we go to definition.
-
-"noremap <F3> :Autoformat<CR> key IMPORTANT: deprecated ATM
-
-"let g:autoformat_autoindent = 0
-let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 0
-set textwidth=88
-set colorcolumn=88
-let g:one_allow_italics = 1 " I love italic for comments
 
 
+" mouse
+set mouse=a
+let g:is_mouse_enabled = 1
+noremap <silent> <Leader>m :call ToggleMouse()<CR>
+function ToggleMouse()
+    if g:is_mouse_enabled == 1
+        echo "Mouse OFF"
+        set mouse=
+        let g:is_mouse_enabled = 0
+    else
+        echo "Mouse ON"
+        set mouse=a
+        let g:is_mouse_enabled = 1
+    endif
+endfunction
 
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+" color scheme
+syntax on
+colorscheme onedark
+filetype on
+filetype plugin indent on
+
+" lightline
+set noshowmode
+let g:lightline = { 'colorscheme': 'onedark' }
+
+" code folding
+set foldmethod=indent
+set foldlevel=99
+
+" wrap toggle
+setlocal nowrap
+noremap <silent> <Leader>w :call ToggleWrap()<CR>
+function ToggleWrap()
+    if &wrap
+        echo "Wrap OFF"
+        setlocal nowrap
+        set virtualedit=all
+        silent! nunmap <buffer> <Up>
+        silent! nunmap <buffer> <Down>
+        silent! nunmap <buffer> <Home>
+        silent! nunmap <buffer> <End>
+        silent! iunmap <buffer> <Up>
+        silent! iunmap <buffer> <Down>
+        silent! iunmap <buffer> <Home>
+        silent! iunmap <buffer> <End>
+    else
+        echo "Wrap ON"
+        setlocal wrap linebreak nolist
+        set virtualedit=
+        setlocal display+=lastline
+        noremap  <buffer> <silent> <Up>   gk
+        noremap  <buffer> <silent> <Down> gj
+        noremap  <buffer> <silent> <Home> g<Home>
+        noremap  <buffer> <silent> <End>  g<End>
+        inoremap <buffer> <silent> <Up>   <C-o>gk
+        inoremap <buffer> <silent> <Down> <C-o>gj
+        inoremap <buffer> <silent> <Home> <C-o>g<Home>
+        inoremap <buffer> <silent> <End>  <C-o>g<End>
+    endif
+endfunction
+
+" move through split windows
+nmap <leader><Up> :wincmd k<CR>
+nmap <leader><Down> :wincmd j<CR>
+nmap <leader><Left> :wincmd h<CR>
+nmap <leader><Right> :wincmd l<CR>
+
+" move through buffers
+nmap <leader>[ :bp!<CR>
+nmap <leader>] :bn!<CR>
+nmap <leader>x :bd<CR>
+
+" restore place in file from previous session
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" file browser
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+let NERDTreeMinimalUI = 1
+let g:nerdtree_open = 0
+map <leader>n :call NERDTreeToggle()<CR>
+function NERDTreeToggle()
+    NERDTreeTabsToggle
+    if g:nerdtree_open == 1
+        let g:nerdtree_open = 0
+    else
+        let g:nerdtree_open = 1
+        wincmd p
+    endif
+endfunction
+
+" syntastic
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+"map <leader>s :SyntasticCheck<CR>
+"map <leader>d :SyntasticReset<CR>
+"map <leader>e :lnext<CR>
+"map <leader>r :lprev<CR>
+
+" tag list
+map <leader>t :TagbarToggle<CR>
+
+" copy, cut and paste
+vmap <C-c> "+y
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
+
+" disable autoindent when pasting text
+" source: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+function! XTermPasteBegin()
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+execute pathogen#infect()
+call pathogen#helptags()
+
+let g:jedi#usages_command = "<leader>z"
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#use_tabs_not_buffers = 1
 
 
-vmap <C-c> "+y 
-
-
-"
-"
-" jedi
-let g:jedi#goto_command = "gc"
+" testing features
+let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "gf"
+let g:jedi#goto_stubs_command = "<leader>s"
+let g:jedi#goto_definitions_command = ""
 let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
-let g:jedi#use_splits_not_buffers = "right"
-let g:pymode_virtualenv=1
-let g:python_highlight_all = 1
+let g:jedi#popup_on_dot = 1
 
 
-source ~/.vim/NERDTree_settings.vim "LOAD nerd tree settings
-
-"AWESOME ULTRA MAGIC REGULAR REGEX for highlight methods
-au BufReadPost,BufNewFile *.py syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
-
-"" Run always when a python file is write
-autocmd BufWritePost *.py call flake8#Flake8()
-
-
-source ~/.vim/denite.vim " all plugins
-
-
-" === Coc.nvim === "
-" use <tab> for trigger completion and navigate to next complete item
-
-set cmdheight=2
-set updatetime=300
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+" Better navigating through omnicomplete option list
+" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
+"" set completeopt=longest,menuone
+function! OmniPopup(action)
+     if pumvisible()
+         if a:action == 'j'
+             return "\<C-N>"
+         elseif a:action == 'k'
+             return "\<C-P>"
+         endif
+     endif
+     return a:action
 endfunction
 
+au BufReadPost,BufNewFile *.py syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
+autocmd BufWritePost *.py call flake8#Flake8()
 
+"YCM CONFIG
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-
-
-
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-
-
-
-
-
-
-
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-"Close preview window when completion is done.
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-
-
-
-
-" coc.nvim color changes
-hi! link CocErrorSign WarningMsg
-hi! link CocWarningSign Number
-hi! link CocInfoSign Type
-
-" === coc.nvim === "
-nmap <silent> <leader>dd <Plug>(coc-definition)
-nmap <silent> <leader>dr <Plug>(coc-references)
-nmap <silent> <leader>dj <Plug>(coc-implementation)
-
-" FINAL COC CONFIS
-
-
-
-
-
-"EMMET CONFIG 
-let g:user_emmet_leader_key=','
-let g:deoplete#enable_at_startup = 1
-
-
-
-" UI SETTINGS
-set termguicolors
-let g:palenight_terminal_italics=1
-set background=dark
-
-
-
-:set cursorline
-:hi clear CursorLine
-:hi CursorLine gui=bold
-highlight Cursorline cterm=none gui=none term=none guibg=Grey30
-
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-"                                      MISC
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-set statusline^=%{coc#status()}
-autocmd FileType python let b:coc_root_patterns = ['.env', '.venv', '.git']
-set number
-
-" Reload icons after init source
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-"Enable prettier
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-noremap <leader>f :Prettier<CR> "set keys to executte command
-
-
-"black congiration map and execute when allways save file
-noremap <leader>p :Black<CR> "set keys to executte command
-autocmd BufWritePre *.py execute ':Isort'
-
-
-" enable the magic of tabs line in neovim
-"let g:airline#extensions#tabline#enabled = 1
-"testing transparent background
-"hi! Normal ctermbg=NONE guibg=NONE
-"let g:indentLine_setColors = 0  
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-
-augroup rainbow_lisp
-  autocmd!
-  autocmd FileType javascript,jsx,python,lisp,clojure,scheme RainbowParentheses
-augroup END
-
-" List of colors that you do not want. ANSI code or #RRGGBB
-"let g:rainbow#blacklist = [233, 234, 73, 30, 96, 214, 167, 107, 172, 50, 215, '#c792ea', '#ff5370',  202,]
-colorscheme onedark
-let g:lightline = { 'colorscheme': 'onedark' }
