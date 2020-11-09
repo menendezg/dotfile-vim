@@ -8,15 +8,18 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
+
+"ide mode 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+
 Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'ervandew/supertab'
 
-Plug 'psf/black', { 'branch': 'stable' }
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 Plug 'nvie/vim-flake8'
-Plug 'Valloric/YouCompleteMe'
 Plug 'sheerun/vim-polyglot'
 
 Plug 'editorconfig/editorconfig-vim'
@@ -211,8 +214,6 @@ function! XTermPasteBegin()
 endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-execute pathogen#infect()
-call pathogen#helptags()
 
 let g:jedi#usages_command = "<leader>z"
 let g:jedi#popup_on_dot = 0
@@ -232,24 +233,69 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#popup_on_dot = 1
 
 
-" Better navigating through omnicomplete option list
-" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-"" set completeopt=longest,menuone
-function! OmniPopup(action)
-     if pumvisible()
-         if a:action == 'j'
-             return "\<C-N>"
-         elseif a:action == 'k'
-             return "\<C-P>"
-         endif
-     endif
-     return a:action
-endfunction
-
 au BufReadPost,BufNewFile *.py syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
 autocmd BufWritePost *.py call flake8#Flake8()
 
 "YCM CONFIG
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"let g:ycm_autoclose_preview_window_after_completion=1
+"map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+
+
+" VIM coc configs 
+" use <tab> for trigger completion and navigate to next complete item
+
+set cmdheight=2
+set updatetime=300
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+
+
+
+
+
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
+
+
+
+
+
+
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+"Close preview window when completion is done.
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+
+
+
+
+" coc.nvim color changes
+hi! link CocErrorSign WarningMsg
+hi! link CocWarningSign Number
+hi! link CocInfoSign Type
+
+" === coc.nvim === "
+nmap <silent> <leader>dd <Plug>(coc-definition)
+nmap <silent> <leader>dr <Plug>(coc-references)
+nmap <silent> <leader>dj <Plug>(coc-implementation)
+
+" FINAL COC CONFIS
