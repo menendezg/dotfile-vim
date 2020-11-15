@@ -1,3 +1,11 @@
+" memory for commands "
+" zc - fold 
+" zo - open 
+" leader-s - git blame by line
+"-----------------------------------------------------------------------------
+
+
+
 " plugins
 let need_to_install_plugins = 0
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -37,6 +45,10 @@ Plug 'vim-scripts/indentpython.vim'
 Plug 'lepture/vim-jinja'
 Plug 'pangloss/vim-javascript'
 Plug 'prettier/vim-prettier'
+
+" GIT plugins
+Plug 'zivyangll/git-blame.vim'
+Plug 'tmhedberg/simpylfold'
 call plug#end()
 
 filetype plugin indent on
@@ -215,26 +227,27 @@ endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
-let g:jedi#usages_command = "<leader>z"
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-let g:jedi#use_tabs_not_buffers = 1
+"let g:jedi#usages_command = "<leader>z"
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#popup_select_first = 0
+"let g:jedi#use_tabs_not_buffers = 1
 
 
 " testing features
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_stubs_command = "<leader>s"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#popup_on_dot = 1
+"let g:jedi#goto_command = "<leader>d"
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_stubs_command = "<leader>s"
+"let g:jedi#goto_definitions_command = ""
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
+"let g:jedi#popup_on_dot = 1
 
 
 au BufReadPost,BufNewFile *.py syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
-autocmd BufWritePost *.py call flake8#Flake8()
+" Disable because I have flake 8 in the ncoc
+"autocmd BufWritePost *.py call flake8#Flake8()
 
 "YCM CONFIG
 "let g:ycm_autoclose_preview_window_after_completion=1
@@ -299,3 +312,7 @@ nmap <silent> <leader>dr <Plug>(coc-references)
 nmap <silent> <leader>dj <Plug>(coc-implementation)
 
 " FINAL COC CONFIS
+"
+" Config for Git BLAME
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
+
